@@ -6,7 +6,7 @@ node {
     sh "cd \${WORKSPACE}/terraform; terraform init -var \"access_key=\${ACCESS_KEY}\" -var \"secret_key=\${SECRET_KEY}\" -var \"cluster-name=\${CLUSTER_NAME}\"; terraform apply -input=false -auto-approve -var \"access_key=\${ACCESS_KEY}\" -var \"secret_key=\${SECRET_KEY}\" -var \"cluster-name=\${CLUSTER_NAME}\""   
   }
   stage('Join Worker Nodes') {
-    sh "mkdir ~/.kube"
+    sh 'test ! -d ~/.kube && mkdir ~/.kube'
     sh "cd \${WORKSPACE}/terraform; terraform output kubeconfig >> ~/.kube/config-\${CLUSTER_NAME}"
     env.KUBECONFIG = "~/.kube/config-\${CLUSTER_NAME}"
     sh 'kubectl get svc'
