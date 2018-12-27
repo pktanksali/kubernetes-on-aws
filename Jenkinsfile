@@ -24,7 +24,7 @@ node {
     input('QA Approval...')
   } 
   stage('Cleanup') {
-    sh "cd \${WORKSPACE}/terraform; terraform destroy"
+    sh "cd \${WORKSPACE}/terraform; terraform destroy -auto-approve -var \"access_key=\${ACCESS_KEY}\" -var \"secret_key=\${SECRET_KEY}\" -var \"cluster-name=\${CLUSTER_NAME}\""
     cleanWs()
   }
 }
