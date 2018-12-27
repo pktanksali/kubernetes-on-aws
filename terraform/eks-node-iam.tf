@@ -33,6 +33,6 @@ resource "aws_iam_role_policy_attachment" "prasad-kube-container-policy" {
 }
 
 resource "aws_iam_instance_profile" "prasad-kube-node" {
-  name = "eks-node-profile"
+  name = "eks-node-1"
   role = "${aws_iam_role.prasad-kube-node.name}"
 }
